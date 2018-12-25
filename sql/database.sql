@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS `singer` (
   `id`   INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(50),
+  `name` VARCHAR(100),
   PRIMARY KEY (`id`)
 )
 ENGINE = InnoDB
@@ -9,11 +9,11 @@ DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE IF NOT EXISTS `song` (
   `id`        INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `title`     VARCHAR(50),
+  `title`     VARCHAR(100),
   `lyric`     TEXT DEFAULT NULL,
   `singer_id` INT(10) UNSIGNED NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE(`title`, `lyric`(50)),
+  UNIQUE(`title`, `lyric`(100)),
   CONSTRAINT `fk_singer` FOREIGN KEY (`singer_id`) REFERENCES `singer` (`id`)
   ON DELETE NO ACTION ON UPDATE CASCADE
 )
@@ -23,8 +23,8 @@ DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE IF NOT EXISTS `user` (
   `id`        INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name`      VARCHAR(50),
-  `password`  VARCHAR(50),
+  `name`      VARCHAR(100),
+  `password`  VARCHAR(100),
   PRIMARY KEY (`id`)
 )
 ENGINE = InnoDB

@@ -27,7 +27,7 @@
                     <p class="add-new-user-check__wrapper__content font-red">ユーザ名が入力されていません</p>
                 <?php }
 
-                $passwordConditionFulfilled = preg_match('/\A(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,50}+\z/', $password);
+                $passwordConditionFulfilled = preg_match('/\A(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,100}+\z/', $password);
 
                 if (empty($password)) { ?>
                     <p class="add-new-user-check__wrapper__content font-red">パスワードが入力されていません</p>
