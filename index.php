@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>歌詞リスト | Lyrics Parser | 情報ネットワーク特論2018</title>
+    <title>ログイン | Lyrics Parser | 情報ネットワーク特論2018</title>
     <meta name="description" content="歌詞をパースしてくれるWEBアプリケーション。">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="image/favicon.ico">
@@ -13,62 +13,34 @@
 </header>
 
 <main id="top" class="site-main" role="main">
-    <nav class="site-main__navigation">
-        <a class="site-main__navigation__item" href="lyrics_list.php">歌詞リスト</a>
-        <a class="site-main__navigation__item" href="index.php">歌詞検索</a>
-    </nav>
-
     <article class="site-main__content">
-        <div class="divForReference" align="center">
-            <form action="./" method="get">
-                <table>
-                    <tr>
-                        <td>曲名：</td>
-                        <td><input type="text" name="title" style="margin-right: 20px"></td>
-                        <td style=color:red></td>
-                    </tr>
-                    <tr>
-                        <td>歌手名：</td>
-                        <td><input type="text" name="singerName" style="margin-right: 20px"></td>
-                        <td style=color:red></td>
-                    </tr>
-                </table>
-                <input type="submit" value="登録済み曲を検索">
+        <section class="login">
+            <form class="login__form" method="post" action="login_check.php">
+                <p class="login__form__label">USER NAME</p>
+                <input name="username" type="text" class="login__form__username" placeholder="ユーザ名を入力してください">
+                <p class="login__form__label">PASSWORD</p>
+                <input name="password" type="password" class="login__form__password" placeholder="パスワードを入力してください">
+                <button type="submit" class="login__form__submit">ログイン</button>
             </form>
-            <% if (boardList.length == 0){ %>
-            <p>検索結果がありません</p>
-            <% } %>
-        </div>
-        <div align="center">
-            <a class="register" href="registration/">
-                曲の新規登録を行う
-            </a>
-        </div>
-        <br>
-        <% if (boardList.length != 0){ %>
-        <div align="center">
-            <table border="1">
-                <caption><b>登録済みの曲</b></caption>
-                <tr>
-                    <th>#</th>
-                    <th>曲名</th>
-                    <th>歌手名</th>
-                </tr>
-                <% boardList.forEach(function (value) { %>
-                <tr>
-                    <td><a name="anchor<%= value["id"] %>"><%= value["id"] %></a></td>
-                    <td><a><%= value["title"] %></a></td>
-                    <td><%= value["name"] %></td>
-                    
-                </tr>
-                <% }); %>
-            </table>
-        </div>
+        </section>
+
+        <section class="add-new-user">
+            <form class="add-new-user__form" method="post" action="add_new_user_check.php">
+                <p class="add-new-user__form__label">ユーザ名を入力してください</p>
+                <input name="username" type="text" class="add-new-user__form__username" placeholder="例：山田太郎">
+                <p class="add-new-user__form__label">パスワードを入力してください</p>
+                <input name="password" type="password" class="add-new-user __form__password"
+                       placeholder="小文字、大文字、数字をそれぞれ1種類以上含む8文字以上">
+                <input name="password-again" type="password" class="add-new-user__form__password-again"
+                       placeholder="確認のため、再度パスワードを入力してください">
+                <button type="submit" class="add-new-user__form__submit">新規登録</button>
+            </form>
+        </section>
     </article>
 </main>
 
 <footer class="site-footer">
-    <p class="site-footer__content">© 2018 Yudai TAMURA</p>
+    <p class="site-footer__content">@ <?= date('Y'); ?> Yudai TAMURA</p>
 </footer>
 </body>
 </html>
