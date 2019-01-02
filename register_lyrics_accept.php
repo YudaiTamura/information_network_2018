@@ -79,12 +79,21 @@ if (!isset($_SESSION['login'])) { ?>
                         $insertSingerNameQuery->execute([$singerName]);
 
                         // 曲名をDBにインサート
-                        $insertSongTitleQuery = $pdo->prepare('INSERT INTO song (title, singer_id) VALUES (?, LAST_INSERT_ID())');
-                        $insertSongTitleQuery->execute([$songTitle]);
+                        $insertSongTitleQuery = $pdo->prepare(
+                            'INSERT INTO song (title, singer_id)
+                            SELECT ?, id FROM singer
+                            WHERE `name` = ?;'
+                        );
+                        $insertSongTitleQuery->execute([$songTitle, $singerName]);
 
                         // ユーザIDをDBにインサート
-                        $insertUserIdQuery = $pdo->prepare('INSERT INTO user_song (user_id, song_id) VALUES (?, LAST_INSERT_ID())');
-                        $insertUserIdQuery->execute([$_SESSION['user_id']]);
+                        $insertUserIdQuery = $pdo->prepare(
+                            'INSERT INTO user_song (user_id, song_id)
+                            SELECT ?, song.id FROM song
+                            INNER JOIN singer ON singer.id = song.singer_id
+                            WHERE song.title = ? AND singer.name = ?;'
+                        );
+                        $insertUserIdQuery->execute([$_SESSION['user_id'], $songTitle, $singerName]);
                     } catch (PDOException $e) {
                         header('Content-Type: text/plain; charset=UTF-8', true, 500);
                         exit($e->getMessage());
