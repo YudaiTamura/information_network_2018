@@ -94,21 +94,38 @@ if (!isset($_SESSION['login'])) { ?>
                             WHERE song.title = ? AND singer.name = ?;'
                         );
                         $insertUserIdQuery->execute([$_SESSION['user_id'], $songTitle, $singerName]);
+
+                        // background_lyrics_parser.phpにsong.idを渡すためにクエリ実行
+                        $getSongIdQuery = $pdo->prepare(
+                            'SELECT song.id, song.title, singer.name FROM song
+                            INNER JOIN singer ON singer.id = song.singer_id
+                            WHERE song.title = ? AND singer.name = ?;'
+                        );
+                        $getSongIdQuery->execute([$songTitle, $singerName]);
+                        $songInformation = $getSongIdQuery->fetch();
+                        $songIdForBackgroundProgram = $songInformation['id'];
+                        $songTitleForBackgroundProgram = $songInformation['title'];
+                        $singerNameForBackgroundProgram = $songInformation['name'];
+
                     } catch (PDOException $e) {
                         header('Content-Type: text/plain; charset=UTF-8', true, 500);
                         exit($e->getMessage());
                     }
                     // バックグラウンドでその曲の歌詞を歌詞サイトから取ってくる
-                    exec('nohup php background_lyrics_parser.php > /dev/null &');
+                    $command = 'nohup php background_lyrics_parser.php ' .
+                        $songIdForBackgroundProgram . ' ' .
+                        $songTitleForBackgroundProgram . ' ' .
+                        $singerNameForBackgroundProgram . ' > /dev/null &';
+                    exec($command);
                     ?>
 
                     <div class="register-lyrics-accept__done">
                         <ul class="register-lyrics-accept__done__song-info">
                             <li class="register-lyrics-accept__done__song-info__item">
-                                曲名： <?= $singerName; ?>
+                                曲名： <?= $songTitle; ?>
                             </li>
                             <li class="register-lyrics-accept__done__song-info__item">
-                                歌手名： <?= $songTitle; ?>
+                                歌手名： <?= $singerName; ?>
                             </li>
                         </ul>
                         <p class="register-lyrics-accept__done__text">
