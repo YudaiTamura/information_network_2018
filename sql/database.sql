@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS `song` (
   `lyrics`     TEXT DEFAULT NULL,
   `singer_id` INT(10) UNSIGNED NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE(`title`, `lyrics`(100)),
+  UNIQUE(`title`, `singer_id`),
   CONSTRAINT `fk_singer` FOREIGN KEY (`singer_id`) REFERENCES `singer` (`id`)
   ON DELETE NO ACTION ON UPDATE CASCADE
 )
