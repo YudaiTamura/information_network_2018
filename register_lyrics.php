@@ -12,35 +12,39 @@
     <h1 class="site-header__title">Lyrics Parser</h1>
 </header>
 
+<?php
+session_start();
+session_regenerate_id(true);
+if (!isset($_SESSION['login'])) { ?>
+    <main id="top" class="site-main" role="main">
+        <section class="not-login">
+            <p class="not-login__text">ログインされていません</p>
+            <a class="not-login__link" href="index.php">ログイン画面</a>
+        </section>
+    </main>
+    <?php
+    exit();
+} ?>
+
 <main id="top" class="site-main" role="main">
     <nav class="site-main__navigation">
         <a class="site-main__navigation__item" href="lyrics_list.php">歌詞リスト</a>
-        <a class="site-main__navigation__item" href="index.php">歌詞検索</a>
+        <a class="site-main__navigation__item" href="register_lyrics.php">歌詞検索</a>
+        <a class="site-main__navigation__item" href="logout.php">ログアウト</a>
     </nav>
 
     <article class="site-main__content">
-        <form action="post" method="post" enctype="multipart/form-data">
-            <table>
-                <tr>
-                    <td>曲名：</td>
-                    <td><input type="text" name="title" style="margin-right: 20px" value=<%= inputtedTexts["title"] %>>
-                    </td>
-                    <td style=color:red><%= errorMessages["title"] %></td>
-                </tr>
-                <tr>
-                    <td>歌手名：</td>
-                    <td><input type="text" name="singerName" style="margin-right: 20px" value=<%= inputtedTexts["singerName"] %>></td>
-                    <td style=color:red><%= errorMessages["singerName"] %></td>
-                </tr>
-                <tr>
-                    <td>mp3ファイル：</td>
-                    <td><input type="file" name="mp3file" size="30"></td>
-                    <td style=color:red><%= errorMessages["mp3file"] %></td>
-                </tr>
-            </table>
+        <section class="register-lyrics">
 
-            <input type="submit" value="新たに登録する">
-        </form>
+            <form class="register-lyrics__form" method="post" action="register_lyrics_accept.php">
+                <p class="register-lyrics__form__label">登録したい曲の曲名を入力してください</p>
+                <input name="song_title" type="text" class="register-lyrics__form__song-title" placeholder="例：花">
+                <p class="register-lyrics__form__label">登録したい曲の歌手名を入力してください</p>
+                <input name="singer_name" type="text" class="register-lyrics __form__singer-name" placeholder="例：滝廉太郎">
+                <button type="submit" class="register-lyrics__form__submit">新規登録</button>
+            </form>
+
+        </section>
     </article>
 </main>
 

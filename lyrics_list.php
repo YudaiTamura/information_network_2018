@@ -44,7 +44,7 @@ if (!isset($_SESSION['login'])) { ?>
             );
             try {
                 $statement = $pdo->prepare(
-                    'SELECT song.title, singer.name, song.lyrics
+                    'SELECT song.id, song.title, singer.name, song.lyrics
                     FROM song
                     INNER JOIN singer ON singer.id = song.singer_id
                     INNER JOIN user_song ON user_song.song_id = song.id
@@ -66,7 +66,9 @@ if (!isset($_SESSION['login'])) { ?>
                         <th class="lyrics-list__table__row__label">歌詞</th>
                     </tr>
                     <tr class="lyrics-list__table__row">
-                        <td class="lyrics-list__table__row__data"><?= $record["title"]; ?></td>
+                        <td id="song-<?= $record["id"]; ?>" class="lyrics-list__table__row__data">
+                            <?= $record["title"]; ?>
+                        </td>
                         <td class="lyrics-list__table__row__data"><?= $record["name"]; ?></td>
                         <td class="lyrics-list__table__row__data">
                             <button type="button" class="lyrics-list__table__row__data__display-lyrics">表示</button>
@@ -75,7 +77,9 @@ if (!isset($_SESSION['login'])) { ?>
                     </tr>
                     <?php while ($record = $statement->fetch()) { ?>
                         <tr class="lyrics-list__table__row">
-                            <td class="lyrics-list__table__row__data"><?= $record["title"]; ?></td>
+                            <td id="song-<?= $record["id"]; ?>" class="lyrics-list__table__row__data">
+                                <?= $record["title"]; ?>
+                            </td>
                             <td class="lyrics-list__table__row__data"><?= $record["name"]; ?></td>
                             <td class="lyrics-list__table__row__data">
                                 <button type="button" class="lyrics-list__table__row__data__display-lyrics">表示</button>
