@@ -34,9 +34,11 @@
         }
 
         $usrIdMatchesPassword = false;
+        $userId = null;
         while ($userRecord = $statement->fetch(PDO::FETCH_ASSOC)) {
             if (password_verify($password, $userRecord['password'])) {
                 $usrIdMatchesPassword = true;
+                $userId = $userRecord['id'];
                 break;
             }
         }
@@ -44,6 +46,7 @@
         if ($usrIdMatchesPassword) {
             session_start();
             $_SESSION['login'] = 1;
+            $_SESSION['user_id'] = $userId;
             header('Location: lyrics_list.php');
         } else { ?>
             <section class="login-failure">

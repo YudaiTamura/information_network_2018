@@ -12,58 +12,82 @@
     <h1 class="site-header__title">Lyrics Parser</h1>
 </header>
 
+<?php
+session_start();
+session_regenerate_id(true);
+if (!isset($_SESSION['login'])) { ?>
+    <main id="top" class="site-main" role="main">
+        <section class="not-login">
+            <p class="not-login__text">ログインされていません</p>
+            <a class="not-login__link" href="index.php">ログイン画面</a>
+        </section>
+    </main>
+    <?php
+    exit();
+} ?>
+
 <main id="top" class="site-main" role="main">
     <nav class="site-main__navigation">
         <a class="site-main__navigation__item" href="lyrics_list.php">歌詞リスト</a>
-        <a class="site-main__navigation__item" href="index.php">歌詞検索</a>
+        <a class="site-main__navigation__item" href="register_lyrics.php">歌詞検索</a>
+        <a class="site-main__navigation__item" href="logout.php">ログアウト</a>
     </nav>
 
     <article class="site-main__content">
-        <div class="divForReference" align="center">
-            <form action="./" method="get">
-                <table>
-                    <tr>
-                        <td>曲名：</td>
-                        <td><input type="text" name="title" style="margin-right: 20px"></td>
-                        <td style=color:red></td>
+        <section class="lyrics-list">
+            <?php
+            $pdo = new PDO(
+                'mysql:dbname=lyrics_parser;host=localhost;',
+                'root',
+                'root',
+                [PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4']
+            );
+            try {
+                $statement = $pdo->prepare(
+                    'SELECT song.title, singer.name, song.lyric
+                    FROM song
+                    INNER JOIN singer ON singer.id = song.singer_id
+                    INNER JOIN user_song ON user_song.song_id = song.id
+                    WHERE user_song.user_id = ?;'
+                );
+                $statement->execute([$_SESSION['user_id']]);
+            } catch (PDOException $e) {
+                header('Content-Type: text/plain; charset=UTF-8', true, 500);
+                exit($e->getMessage());
+            }
+
+            if ($record = $statement->fetch()) { ?>
+                <table class="lyrics-list__table">
+                    <caption class="lyrics-list__table__caption">登録済みの曲</caption>
+                    <tr class="lyrics-list__table__row">
+                        <th class="lyrics-list__table__row__label">曲名</th>
+                        <th class="lyrics-list__table__row__label">歌手名</th>
+                        <th class="lyrics-list__table__row__label">表示</th>
+                        <th class="lyrics-list__table__row__label">歌詞</th>
                     </tr>
-                    <tr>
-                        <td>歌手名：</td>
-                        <td><input type="text" name="singerName" style="margin-right: 20px"></td>
-                        <td style=color:red></td>
+                    <tr class="lyrics-list__table__row">
+                        <td class="lyrics-list__table__row__data"><?= $record["title"]; ?></td>
+                        <td class="lyrics-list__table__row__data"><?= $record["name"]; ?></td>
+                        <td class="lyrics-list__table__row__data">
+                            <button type="button" class="lyrics-list__table__row__data__display-lyrics">表示</button>
+                        </td>
+                        <td class="lyrics-list__table__row__data"><?= $record["lyric"]; ?></td>
                     </tr>
+                    <?php while ($record = $statement->fetch()) { ?>
+                        <tr class="lyrics-list__table__row">
+                            <td class="lyrics-list__table__row__data"><?= $record["title"]; ?></td>
+                            <td class="lyrics-list__table__row__data"><?= $record["name"]; ?></td>
+                            <td class="lyrics-list__table__row__data">
+                                <button type="button" class="lyrics-list__table__row__data__display-lyrics">表示</button>
+                            </td>
+                            <td class="lyrics-list__table__row__data"><?= $record["lyric"]; ?></td>
+                        </tr>
+                    <?php } ?>
                 </table>
-                <input type="submit" value="登録済み曲を検索">
-            </form>
-            <% if (boardList.length == 0){ %>
-            <p>検索結果がありません</p>
-            <% } %>
-        </div>
-        <div align="center">
-            <a class="register" href="registration/">
-                曲の新規登録を行う
-            </a>
-        </div>
-        <br>
-        <% if (boardList.length != 0){ %>
-        <div align="center">
-            <table border="1">
-                <caption><b>登録済みの曲</b></caption>
-                <tr>
-                    <th>#</th>
-                    <th>曲名</th>
-                    <th>歌手名</th>
-                </tr>
-                <% boardList.forEach(function (value) { %>
-                <tr>
-                    <td><a name="anchor<%= value["id"] %>"><%= value["id"] %></a></td>
-                    <td><a><%= value["title"] %></a></td>
-                    <td><%= value["name"] %></td>
-                    
-                </tr>
-                <% }); %>
-            </table>
-        </div>
+            <?php } else { ?>
+                <p class="lyrics-list__no-lyrics-to-display">登録された曲がありません</p>
+            <?php } ?>
+        </section>
     </article>
 </main>
 
