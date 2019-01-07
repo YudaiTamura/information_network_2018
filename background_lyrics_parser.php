@@ -23,9 +23,9 @@ try {
 
 
     // 歌手名と曲名のペアが検索に引っかからなかった場合
-    /*if ($urlToSingleSongPage == '') {
-        // TODO: エラーに飛ばす
-    }*/
+    if ($urlToSingleSongPage == '') {
+        throw new Exception('歌手名と曲名のペアが検索に引っかからなかった');
+    }
 
 
     // 歌手名が一致した曲のURLにアクセスして歌詞をパースする
@@ -39,11 +39,39 @@ try {
         $lyricsText = $xpath->evaluate('string(./div/div[@id="flash_area"]/div/div[@id="kashi_area"])', $viewKashiNode);
     }
 
-    file_put_contents('output.txt', $correctTitle);
+
+    // 取得した歌詞と正しい曲名をDBに書き込む
+    $pdo = new PDO(
+        'mysql:dbname=lyrics_parser;host=localhost;',
+        'root',
+        'root',
+        [PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4']
+    );
+    try {
+        $updateLyricsAndTitleQuery = $pdo->prepare('UPDATE song SET title=?, lyrics=? WHERE id=?;');
+        $updateLyricsAndTitleQuery->execute([$correctTitle, $lyricsText, $songIdToRegister]);
+    } catch (PDOException $e) {
+        exit($e->getMessage());
+    }
+    $pdo = null;
 
 
-
-} catch (Exception $e) { // 曲名の検索結果がなかった時は該当するレコードをテーブルから削除
-    // TODO: DBからレコード削除する処理
-    file_put_contents('output.txt', "エラー！！！");
+} catch (Exception $e) { // 目当ての検索結果がなかった時は該当するレコードをテーブルから削除
+    $pdo = new PDO(
+        'mysql:dbname=lyrics_parser;host=localhost;',
+        'root',
+        'root',
+        [PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4']
+    );
+    try {
+        $deleteUserSongRecordQuery = $pdo->prepare('DELETE FROM `user_song` WHERE `song_id`=?;');
+        $deleteUserSongRecordQuery->execute([$songIdToRegister]);
+        $deleteSongRecordQuery = $pdo->prepare('DELETE FROM `song` WHERE `id`=?;');
+        $deleteSongRecordQuery->execute([$songIdToRegister]);
+    } catch (PDOException $e) {
+        header('Content-Type: text/plain; charset=UTF-8', true, 500);
+        exit($e->getMessage());
+    }
+    $pdo = null;
+    exit($e->getMessage());
 }

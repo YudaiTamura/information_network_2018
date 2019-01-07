@@ -112,10 +112,11 @@ if (!isset($_SESSION['login'])) { ?>
                         exit($e->getMessage());
                     }
                     // バックグラウンドでその曲の歌詞を歌詞サイトから取ってくる
-                    $command = 'nohup php background_lyrics_parser.php ' .
-                        $songIdForBackgroundProgram . ' ' .
-                        $songTitleForBackgroundProgram . ' ' .
-                        $singerNameForBackgroundProgram . ' > /dev/null &';
+                    // TODO: phpへのパスが環境によって違うのでどうにかしたい
+                    $command = 'nohup /Applications/MAMP/bin/php/php7.2.10/bin/php background_lyrics_parser.php "' .
+                        $songIdForBackgroundProgram . '" "' .
+                        $songTitleForBackgroundProgram . '" "' .
+                        $singerNameForBackgroundProgram . '" > /dev/null &';
                     exec($command);
                     ?>
 
