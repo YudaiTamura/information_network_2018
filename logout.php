@@ -34,5 +34,6 @@ session_destroy();
 <footer class="site-footer">
     <p class="site-footer__content">@ <?= date('Y'); ?> Yudai TAMURA</p>
 </footer>
+<script src="dist/bundle.js"></script>
 </body>
 </html>

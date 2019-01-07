@@ -51,5 +51,6 @@ if (!isset($_SESSION['login'])) { ?>
 <footer class="site-footer">
     <p class="site-footer__content">© 2018 Yudai TAMURA</p>
 </footer>
+<script src="dist/bundle.js"></script>
 </body>
 </html>
