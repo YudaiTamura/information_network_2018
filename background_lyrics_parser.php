@@ -12,11 +12,11 @@ try {
     $songListPageDom = new DOMDocument;
     @$songListPageDom->loadHTMLFile($urlToSearchByTitle);
     $xpath = new DOMXPath($songListPageDom);
-    foreach ($xpath->query('//div[@class="result_table"]/table/tbody/tr') as $targetNode) {
-        $singerNameFromSearchedBySongTitleList = $xpath->evaluate('string(./td[@class="td2"]/a)', $targetNode);
+    foreach ($xpath->query('//div[contains(@class,"result_table")]/table/tbody/tr') as $targetNode) {
+        $singerNameFromSearchedBySongTitleList = $xpath->evaluate('string(./td[contains(@class,"td2")]/a)', $targetNode);
         if ($singerNameToRegister == $singerNameFromSearchedBySongTitleList) {
             $singerNameMatchesSearchResult = true;
-            $urlToSingleSongPage = "https://www.uta-net.com" . $xpath->evaluate('string(./td[@class="side td1"]/a/@href)', $targetNode);
+            $urlToSingleSongPage = "https://www.uta-net.com" . $xpath->evaluate('string(./td[contains(@class,"td1")]/a/@href)', $targetNode);
             break;
         }
     }
@@ -35,7 +35,7 @@ try {
     $correctTitle = "";
     $lyricsText = "";
     foreach ($xpath->query('//div[@id="view_kashi"]') as $viewKashiNode) {
-        $correctTitle = $xpath->evaluate('string(./div/div[@class="title"]/h2)', $viewKashiNode);
+        $correctTitle = $xpath->evaluate('string(./div/div[contains(@class,"title")]/h2)', $viewKashiNode);
         $lyricsText = $xpath->evaluate('string(./div/div[@id="flash_area"]/div/div[@id="kashi_area"])', $viewKashiNode);
     }
 

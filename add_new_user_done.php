@@ -37,7 +37,7 @@
 
         <section class="add-new-user-done">
             <p class="add-new-user-done__text">
-                新しいスタッフ <?= $userName; ?> さんを追加しました。
+                新しいユーザー <?= $userName; ?> さんを追加しました。
             </p>
             <a class="add-new-user-done__link" href="index.php">ログイン画面へ</a>
         </section>
