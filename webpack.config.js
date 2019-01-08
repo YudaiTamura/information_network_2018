@@ -1,4 +1,5 @@
 const path = require('path');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
     mode: 'development',
@@ -12,12 +13,12 @@ module.exports = {
             './src/scss/register_lyrics.scss',
             './src/scss/register_lyrics_accept.scss',
             './src/scss/add_new_user_check.scss',
-            './src/scss/add_new_user_done.scss',
+            './src/scss/add_new_user_done.scss'
         ]
     },
     output: {
         path: path.join(__dirname, 'dist'),
-        filename: '[name].js',
+        filename: '[name].js'
     },
     resolve: {
         // モジュールを読み込むときに検索するディレクトリの設定
@@ -27,7 +28,7 @@ module.exports = {
             path.join(__dirname, 'node_modules')
         ],
         // importするときに省略できる拡張子の設定
-        extensions: ['.js', '.scss'],
+        extensions: ['.js', '.scss']
     },
     module: {
         rules: [
@@ -37,16 +38,17 @@ module.exports = {
                 loader: 'babel-loader',
                 query: {
                     presets: ['@babel/preset-env']
-                },
+                }
             },
             {
                 test: /\.scss$/,
                 use: [
+                    MiniCssExtractPlugin.loader,
                     {
                         loader: 'css-loader',
                         options: {
                             url: false,
-                            minimize: true,
+                            minimize: true
                         }
                     },
                     {
@@ -60,11 +62,16 @@ module.exports = {
                                     ]
                                 })
                             ]
-                        },
+                        }
                     },
-                    'sass-loader',
+                    'sass-loader'
                 ]
-            },
-        ],
+            }
+        ]
     },
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: '[name].css'
+        })
+    ]
 };
