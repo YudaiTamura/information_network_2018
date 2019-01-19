@@ -44,11 +44,11 @@ if (!isset($_SESSION['login'])) { ?>
             $singerName = htmlspecialchars($_POST['singer_name']);
 
             if ($songTitle == "") { ?>
-                <p class="register-lyrics-accept__no-title font-red">曲名が入力されていません</p>
+                <p class="register-lyrics-accept__no-title">曲名が入力されていません</p>
             <?php }
 
             if ($singerName == "") { ?>
-                <p class="register-lyrics-accept__no-singer font-red">歌手名が入力されていません</p>
+                <p class="register-lyrics-accept__no-singer">歌手名が入力されていません</p>
             <?php }
 
             if ($songTitle == "" or $singerName == "") { ?>
@@ -133,8 +133,8 @@ if (!isset($_SESSION['login'])) { ?>
                             </li>
                         </ul>
                         <p class="register-lyrics-accept__done__text">
-                            上記の歌詞の登録を受け付けました。
-                            反映には時間がかかることがあります。
+                            上記の歌詞の登録を受け付けました。<br>
+                            反映には時間がかかることがあります。<br>
                             また、歌詞ネットに存在しない曲の場合は歌詞の登録は行われません。
                         </p>
                     </div>
