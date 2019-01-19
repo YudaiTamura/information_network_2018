@@ -1,0 +1,75 @@
+@import "variables";
+
+.site-main.with-nav {
+  display: flex;
+  width: 94vw;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 48px 0;
+
+  /* ナビゲーションのスタイル */
+  .site-main__navigation {
+    width: 8em;
+    height: fit-content;
+    background-color: $blue;
+    margin-right: 32px;
+    border-radius: 8px;
+    overflow: hidden;
+
+    .site-main__navigation__item {
+      font-size: 18px;
+      display: block;
+      line-height: 3em;
+      padding-left: 1em;
+      text-decoration: none;
+      color: $white;
+      border-bottom: 1px solid $gray;
+      transition: all 350ms 0s ease-in-out;
+
+      &:nth-last-child(1){
+        border: none;
+      }
+
+      &:hover {
+        background-color: $dark_blue;
+        transition: all 350ms 0s ease-in-out;
+      }
+    }
+  }
+
+  /* register_lyrics.phpのスタイル */
+  .site-main__content {
+    width: calc(100% - 8em - 32px);
+    margin: 0;
+    padding: 0;
+
+    .register-lyrics {
+      padding-left: 4em;
+
+      .register-lyrics__form {
+        .register-lyrics__form__label {
+          margin-bottom: 8px;
+        }
+
+        input {
+          margin-bottom: 16px;
+          width: 30em;
+          height: 2em;
+          padding-left: 5px;
+        }
+
+        .register-lyrics__form__submit {
+          display: block;
+          border: none;
+          width: 6em;
+          height: 48px;
+          background-color: $blue;
+          color: white;
+          font-weight: bold;
+          border-radius: 4px;
+          font-size: 18px;
+        }
+      }
+    }
+  }
+}

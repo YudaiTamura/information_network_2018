@@ -6,6 +6,7 @@
     <meta name="description" content="歌詞をパースしてくれるWEBアプリケーション。">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="image/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="dist/bundle.css">
 </head>
 <body>
 <header class="site-header">
@@ -24,18 +25,18 @@
                 if ($userName) { ?>
                     <p class="add-new-user-check__wrapper__content">ユーザ名： <?= $userName; ?></p>
                 <?php } else { ?>
-                    <p class="add-new-user-check__wrapper__content font-red">ユーザ名が入力されていません</p>
+                    <p class="add-new-user-check__wrapper__content font-pink">ユーザ名が入力されていません</p>
                 <?php }
 
                 $passwordConditionFulfilled = preg_match('/\A(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,100}+\z/', $password);
 
                 if (empty($password)) { ?>
-                    <p class="add-new-user-check__wrapper__content font-red">パスワードが入力されていません</p>
+                    <p class="add-new-user-check__wrapper__content font-pink">パスワードが入力されていません</p>
                 <?php } else if ($password != $passwordAgain) { ?>
-                    <p class="add-new-user-check__wrapper__content font-red">パスワードが一致しません</p>
+                    <p class="add-new-user-check__wrapper__content font-pink">パスワードが一致しません</p>
                 <?php } else { // パスワードが入力されていて、かつ再度入力したものも一致しているとき
                     if (!$passwordConditionFulfilled) { ?>
-                        <p class="add-new-user-check__wrapper__content font-red">
+                        <p class="add-new-user-check__wrapper__content font-pink">
                             小文字、大文字、数字をそれぞれ1種類以上含む8文字以上のパスワードを設定してください
                         </p>
                     <?php } else {
@@ -65,6 +66,5 @@
 <footer class="site-footer">
     <p class="site-footer__content">© <?= date('Y'); ?> Yudai TAMURA</p>
 </footer>
-<script src="dist/bundle.js"></script>
 </body>
 </html>

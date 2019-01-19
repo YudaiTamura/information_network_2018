@@ -6,6 +6,7 @@
     <meta name="description" content="歌詞をパースしてくれるWEBアプリケーション。">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="image/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="dist/bundle.css">
 </head>
 <body>
 <header class="site-header">
@@ -48,6 +49,5 @@
 <footer class="site-footer">
     <p class="site-footer__content">© <?= date('Y'); ?> Yudai TAMURA</p>
 </footer>
-<script src="dist/bundle.js"></script>
 </body>
 </html>

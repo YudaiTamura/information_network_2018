@@ -1,0 +1,16 @@
+@import "variables";
+
+.add-new-user-done {
+  font-size: 18px;
+  width: fit-content;
+  margin: 0 auto;
+
+  .add-new-user-done__text {
+    width: fit-content;
+    margin-bottom: 24px;
+  }
+  .add-new-user-done__link {
+    color: $blue;
+    font-weight: bold;
+  }
+}

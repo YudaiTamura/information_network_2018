@@ -1,0 +1,34 @@
+@import "variables";
+
+.register-lyrics-accept {
+  padding-left: 4em;
+
+  .register-lyrics-accept__no-title,
+  .register-lyrics-accept__no-singer {
+    margin-bottom: 16px;
+    color: $pink;
+    font-weight: bold;
+  }
+
+  .register-lyrics-accept__back-to-register {
+    border: none;
+    width: 4em;
+    height: 48px;
+    background-color: $blue;
+    color: white;
+    font-weight: bold;
+    border-radius: 4px;
+    font-size: large;
+  }
+
+  .register-lyrics-accept__done {
+    .register-lyrics-accept__done__song-info {
+      margin-bottom: 16px;
+
+      .register-lyrics-accept__done__song-info__item {
+        margin-bottom: 16px;
+        font-size: 18px;
+      }
+    }
+  }
+}

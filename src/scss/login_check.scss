@@ -1,0 +1,26 @@
+@import "variables";
+
+.login-failure {
+  width: fit-content;
+  margin: 0 auto;
+
+  .login-failure__text {
+    width: fit-content;
+    margin-bottom: 16px;
+    font-size: 18px;
+    color: $pink;
+  }
+
+  .login-failure__back {
+    border: none;
+    width: 4em;
+    height: 48px;
+    background-color: $blue;
+    color: white;
+    font-weight: bold;
+    border-radius: 4px;
+    font-size: large;
+    display: block;
+    margin: 0 auto;
+  }
+}

@@ -6,6 +6,7 @@
     <meta name="description" content="歌詞をパースしてくれるWEBアプリケーション。">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="image/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="dist/bundle.css">
 </head>
 <body>
 <header class="site-header">
@@ -22,11 +23,14 @@ if (!isset($_SESSION['login'])) { ?>
             <a class="not-login__link" href="index.php">ログイン画面</a>
         </section>
     </main>
+    <footer class="site-footer">
+        <p class="site-footer__content">© 2018 Yudai TAMURA</p>
+    </footer>
     <?php
     exit();
 } ?>
 
-<main id="top" class="site-main" role="main">
+<main id="top" class="site-main with-nav" role="main">
     <nav class="site-main__navigation">
         <a class="site-main__navigation__item" href="lyrics_list.php">歌詞リスト</a>
         <a class="site-main__navigation__item" href="register_lyrics.php">歌詞検索</a>
@@ -59,11 +63,15 @@ if (!isset($_SESSION['login'])) { ?>
             if ($record = $statement->fetch()) { ?>
                 <table class="lyrics-list__table">
                     <caption class="lyrics-list__table__caption">登録済みの曲</caption>
+                    <colgroup>
+                        <col style='width:calc((100% - 2.5em) / 2);'>
+                        <col style='width:calc((100% - 2.5em) / 2);'>
+                        <col style='width:2.5em;'>
+                    </colgroup>
                     <tr class="lyrics-list__table__row">
                         <th class="lyrics-list__table__row__label">曲名</th>
                         <th class="lyrics-list__table__row__label">歌手名</th>
                         <th class="lyrics-list__table__row__label">表示</th>
-                        <th class="lyrics-list__table__row__label">歌詞</th>
                     </tr>
                     <tr class="lyrics-list__table__row">
                         <td id="song-<?= $record["id"]; ?>" class="lyrics-list__table__row__data">
@@ -71,9 +79,11 @@ if (!isset($_SESSION['login'])) { ?>
                         </td>
                         <td class="lyrics-list__table__row__data"><?= $record["name"]; ?></td>
                         <td class="lyrics-list__table__row__data">
-                            <button type="button" class="lyrics-list__table__row__data__display-lyrics">表示</button>
+                            <input type="checkbox" class="lyrics-list__table__row__data__display-lyrics">
                         </td>
-                        <td class="lyrics-list__table__row__data"><?= $record["lyrics"]; ?></td>
+                    </tr>
+                    <tr class="lyrics-list__table__row">
+                        <td class="lyrics-list__table__row__lyrics" colspan=3><?= $record["lyrics"]; ?></td>
                     </tr>
                     <?php while ($record = $statement->fetch()) { ?>
                         <tr class="lyrics-list__table__row">
@@ -82,9 +92,11 @@ if (!isset($_SESSION['login'])) { ?>
                             </td>
                             <td class="lyrics-list__table__row__data"><?= $record["name"]; ?></td>
                             <td class="lyrics-list__table__row__data">
-                                <button type="button" class="lyrics-list__table__row__data__display-lyrics">表示</button>
+                                <input type="checkbox" class="lyrics-list__table__row__data__display-lyrics">
                             </td>
-                            <td class="lyrics-list__table__row__data"><?= $record["lyrics"]; ?></td>
+                        </tr>
+                        <tr class="lyrics-list__table__row">
+                            <td class="lyrics-list__table__row__lyrics" colSpan=3><?= $record["lyrics"]; ?></td>
                         </tr>
                     <?php } ?>
                 </table>

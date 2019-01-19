@@ -1,0 +1,16 @@
+@import "variables";
+
+.logout {
+  font-size: 18px;
+  width: fit-content;
+  margin: 0 auto;
+
+  .logout__text {
+    width: fit-content;
+    margin-bottom: 24px;
+  }
+  .logout__link {
+    color: $blue;
+    font-weight: bold;
+  }
+}

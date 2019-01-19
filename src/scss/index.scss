@@ -1,0 +1,99 @@
+@import "~normalize.css/normalize";
+@import "~html5-reset/assets/css/reset";
+@import "variables";
+
+.site-header {
+  background-color: $blue;
+
+  .site-header__title {
+    text-align: center;
+    color: $white;
+    font-size: 36px;
+    font-weight: bold;
+    line-height: 72px;
+    letter-spacing: 3px;
+  }
+}
+
+.site-main {
+  min-height: calc(100vh - 72px - 32px); /*100vh - ヘッダーの高さ - フッターの高さ*/
+
+  .site-main__content {
+    width: 94vw;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 48px 0;
+
+    .login,
+    .add-new-user {
+      display: inline-table;
+      width: 49%; /*50%だと横並びにならない*/
+      overflow: hidden;
+
+      * {
+        display: block;
+      }
+    }
+
+    .login__title,
+    .add-new-user__title {
+      font-size: 24px;
+      font-weight: bold;
+      color: $blue;
+      margin-bottom: 16px;
+    }
+
+    .login__form,
+    .add-new-user__form {
+      .login__form__label,
+      .add-new-user__form__label {
+        margin-bottom: 8px;
+      }
+
+      input {
+        margin-bottom: 16px;
+        width: 82%;
+      }
+
+      .login__form__submit,
+      .add-new-user__form__submit {
+        border: none;
+        width: 20%;
+        height: 48px;
+        background-color: $blue;
+        color: white;
+        font-weight: bold;
+        border-radius: 4px;
+        font-size: large;
+      }
+    }
+  }
+
+  /* ログインされていないのにログインが必要なページにアクセスしたときのデザイン */
+  .not-login {
+    font-size: 18px;
+    width: fit-content;
+    margin: 0 auto;
+    padding-top: 48px;
+
+    .not-login__text {
+      width: fit-content;
+      margin-bottom: 24px;
+    }
+    .not-login__link {
+      color: $blue;
+      font-weight: bold;
+    }
+  }
+}
+
+.site-footer {
+  background-color: $blue;
+
+  .site-footer__content {
+    text-align: center;
+    color: $white;
+    font-size: 16px;
+    line-height: 32px;
+  }
+}
