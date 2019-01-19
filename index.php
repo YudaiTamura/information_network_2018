@@ -16,6 +16,7 @@
 <main id="top" class="site-main" role="main">
     <article class="site-main__content">
         <section class="login">
+            <h2 class="login__title">ログイン</h2>
             <form class="login__form" method="post" action="login_check.php">
                 <p class="login__form__label">USER NAME</p>
                 <input name="username" type="text" class="login__form__username" placeholder="ユーザ名を入力してください">
@@ -26,6 +27,7 @@
         </section>
 
         <section class="add-new-user">
+            <h2 class="add-new-user__title">新規ユーザ登録</h2>
             <form class="add-new-user__form" method="post" action="add_new_user_check.php">
                 <p class="add-new-user__form__label">ユーザ名を入力してください</p>
                 <input name="username" type="text" class="add-new-user__form__username" placeholder="例：山田太郎">
