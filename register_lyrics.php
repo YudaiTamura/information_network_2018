@@ -27,7 +27,7 @@ if (!isset($_SESSION['login'])) { ?>
     exit();
 } ?>
 
-<main id="top" class="site-main" role="main">
+<main id="top" class="site-main with-nav" role="main">
     <nav class="site-main__navigation">
         <a class="site-main__navigation__item" href="lyrics_list.php">歌詞リスト</a>
         <a class="site-main__navigation__item" href="register_lyrics.php">歌詞検索</a>
