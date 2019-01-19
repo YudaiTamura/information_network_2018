@@ -7,6 +7,10 @@
   .add-new-user-check__wrapper {
     width: fit-content;
 
+    .font-pink {
+      color: $pink;
+    }
+
     .add-new-user-check__wrapper__content {
       width: fit-content;
       font-size: 18px;
