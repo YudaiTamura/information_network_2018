@@ -1,0 +1,32 @@
+@import "variables";
+
+.add-new-user-check {
+  margin: 0 auto;
+  width: fit-content;
+
+  .add-new-user-check__wrapper {
+    width: fit-content;
+
+    .add-new-user-check__wrapper__content {
+      width: fit-content;
+      font-size: 18px;
+      margin-bottom: 24px;
+    }
+  }
+
+  .add-new-user-check__form {
+    display: flex;
+    justify-content: space-between;
+
+  button {
+      border: none;
+      width: 72px;
+      height: 48px;
+      background-color: #00b8ee;
+      color: white;
+      font-weight: bold;
+      border-radius: 4px;
+      font-size: large;
+    }
+  }
+}
