@@ -42,9 +42,9 @@ if (!isset($_SESSION['login'])) { ?>
 
             <form class="register-lyrics__form" method="post" action="register_lyrics_accept.php">
                 <p class="register-lyrics__form__label">登録したい曲の曲名を入力してください</p>
-                <input name="song_title" type="text" class="register-lyrics__form__song-title" placeholder="例：花">
+                <input name="song_title" type="text" class="register-lyrics__form__song-title" placeholder="例：Lemon">
                 <p class="register-lyrics__form__label">登録したい曲の歌手名を入力してください</p>
-                <input name="singer_name" type="text" class="register-lyrics __form__singer-name" placeholder="例：滝廉太郎">
+                <input name="singer_name" type="text" class="register-lyrics __form__singer-name" placeholder="例：米津玄師">
                 <button type="submit" class="register-lyrics__form__submit">新規登録</button>
             </form>
 
