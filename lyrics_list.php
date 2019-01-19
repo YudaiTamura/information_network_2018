@@ -63,11 +63,15 @@ if (!isset($_SESSION['login'])) { ?>
             if ($record = $statement->fetch()) { ?>
                 <table class="lyrics-list__table">
                     <caption class="lyrics-list__table__caption">登録済みの曲</caption>
+                    <colgroup>
+                        <col style='width:calc((100% - 2.5em) / 2);'>
+                        <col style='width:calc((100% - 2.5em) / 2);'>
+                        <col style='width:2.5em;'>
+                    </colgroup>
                     <tr class="lyrics-list__table__row">
                         <th class="lyrics-list__table__row__label">曲名</th>
                         <th class="lyrics-list__table__row__label">歌手名</th>
                         <th class="lyrics-list__table__row__label">表示</th>
-                        <th class="lyrics-list__table__row__label">歌詞</th>
                     </tr>
                     <tr class="lyrics-list__table__row">
                         <td id="song-<?= $record["id"]; ?>" class="lyrics-list__table__row__data">
@@ -75,9 +79,11 @@ if (!isset($_SESSION['login'])) { ?>
                         </td>
                         <td class="lyrics-list__table__row__data"><?= $record["name"]; ?></td>
                         <td class="lyrics-list__table__row__data">
-                            <button type="button" class="lyrics-list__table__row__data__display-lyrics">表示</button>
+                            <input type="checkbox" class="lyrics-list__table__row__data__display-lyrics">
                         </td>
-                        <td class="lyrics-list__table__row__data"><?= $record["lyrics"]; ?></td>
+                    </tr>
+                    <tr class="lyrics-list__table__row">
+                        <td class="lyrics-list__table__row__lyrics" colspan=3><?= $record["lyrics"]; ?></td>
                     </tr>
                     <?php while ($record = $statement->fetch()) { ?>
                         <tr class="lyrics-list__table__row">
@@ -86,9 +92,11 @@ if (!isset($_SESSION['login'])) { ?>
                             </td>
                             <td class="lyrics-list__table__row__data"><?= $record["name"]; ?></td>
                             <td class="lyrics-list__table__row__data">
-                                <button type="button" class="lyrics-list__table__row__data__display-lyrics">表示</button>
+                                <input type="checkbox" class="lyrics-list__table__row__data__display-lyrics">
                             </td>
-                            <td class="lyrics-list__table__row__data"><?= $record["lyrics"]; ?></td>
+                        </tr>
+                        <tr class="lyrics-list__table__row">
+                            <td class="lyrics-list__table__row__lyrics" colSpan=3><?= $record["lyrics"]; ?></td>
                         </tr>
                     <?php } ?>
                 </table>
