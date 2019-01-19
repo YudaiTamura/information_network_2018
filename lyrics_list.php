@@ -23,6 +23,9 @@ if (!isset($_SESSION['login'])) { ?>
             <a class="not-login__link" href="index.php">ログイン画面</a>
         </section>
     </main>
+    <footer class="site-footer">
+        <p class="site-footer__content">© 2018 Yudai TAMURA</p>
+    </footer>
     <?php
     exit();
 } ?>
