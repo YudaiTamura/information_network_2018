@@ -20,9 +20,9 @@ $ cd information_network_2018
 ```
 DBの作成
 ```
-mysql> sql/database.sql
+mysql> source sql/database.sql
 ```
-SCSSのビルド
+JSとSCSSのビルド
 ```
 $ npm install
 $ npm run build
