@@ -24,7 +24,7 @@ if (!isset($_SESSION['login'])) { ?>
         </section>
     </main>
     <footer class="site-footer">
-        <p class="site-footer__content">© 2018 Yudai TAMURA</p>
+        <p class="site-footer__content">@ <?= date('Y'); ?> Yudai TAMURA</p>
     </footer>
     <?php
     exit();
@@ -147,7 +147,7 @@ if (!isset($_SESSION['login'])) { ?>
 </main>
 
 <footer class="site-footer">
-    <p class="site-footer__content">© <?= date('Y'); ?> Yudai TAMURA</p>
+    <p class="site-footer__content">@ <?= date('Y'); ?> Yudai TAMURA</p>
 </footer>
 </body>
 </html>

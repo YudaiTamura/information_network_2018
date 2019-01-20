@@ -47,7 +47,7 @@
 </main>
 
 <footer class="site-footer">
-    <p class="site-footer__content">© <?= date('Y'); ?> Yudai TAMURA</p>
+    <p class="site-footer__content">@ <?= date('Y'); ?> Yudai TAMURA</p>
 </footer>
 </body>
 </html>
